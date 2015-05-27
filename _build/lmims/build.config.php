@@ -4,12 +4,12 @@
 define('PKG_NAME', 'lmims');
 define('PKG_NAME_LOWER', strtolower(PKG_NAME));
 
-define('PKG_VERSION', '0.0.1');
+define('PKG_VERSION', '0.0.2');
 define('PKG_RELEASE', 'beta');
 
 
 /* define paths */
-define('MODX_BASE_PATH', dirname(dirname(dirname(__FILE__))) . '/');
+define('MODX_BASE_PATH', dirname(dirname(dirname(dirname(__FILE__)))) . '/');
 define('MODX_CORE_PATH', MODX_BASE_PATH . 'core/');
 define('MODX_CONNECTORS_PATH', MODX_BASE_PATH . 'connectors/');
 define('MODX_ASSETS_PATH', MODX_BASE_PATH . 'assets/');

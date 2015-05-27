@@ -13,7 +13,8 @@ $tmp = array(
 		,'description'	=> ''
 		,'events'		=> array(
 			'OnWebPagePrerender',
-			'OnDocFormSave'
+			'OnDocFormSave',
+			'OnBeforeEmptyTrash'
 		)
 	)
 );

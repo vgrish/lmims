@@ -8,7 +8,8 @@ $xpdo_meta_map['modLMIMS']= array (
   array (
     'key' => '',
     'date' => 0,
-    'html' => NULL,
+    'hash' => '',
+    'resource' => 0,
   ),
   'fieldMeta' => 
   array (
@@ -30,11 +31,23 @@ $xpdo_meta_map['modLMIMS']= array (
       'default' => 0,
       'index' => 'index',
     ),
-    'html' => 
+    'hash' => 
     array (
-      'dbtype' => 'text',
+      'dbtype' => 'char',
+      'precision' => '40',
       'phptype' => 'string',
       'null' => true,
+      'default' => '',
+      'index' => 'index',
+    ),
+    'resource' => 
+    array (
+      'dbtype' => 'int',
+      'precision' => '10',
+      'attributes' => 'unsigned',
+      'phptype' => 'integer',
+      'null' => true,
+      'default' => 0,
     ),
   ),
   'indexes' => 

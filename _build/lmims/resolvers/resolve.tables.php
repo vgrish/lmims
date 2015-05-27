@@ -18,9 +18,19 @@ if ($object->xpdo) {
 
 			$manager = $modx->getManager();
 
+			$manager->removeObjectContainer('modLMIMS');
 			$manager->createObjectContainer('modLMIMS');
 
-			break;
+			/*$level = $modx->getLogLevel();
+			$modx->setLogLevel(xPDO::LOG_LEVEL_FATAL);
+
+			$manager->removeField('modLMIMS', 'html');
+			$manager->addField('modLMIMS', 'hash', array('after' => 'date'));
+			$manager->addField('modLMIMS', 'resource', array('after' => 'hash'));
+
+			$modx->setLogLevel($level);*/
+
+		break;
 
 		case xPDOTransport::ACTION_UNINSTALL:
 			break;

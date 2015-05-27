@@ -3,7 +3,9 @@ switch ($modx->event->name) {
 	case 'OnWebPagePrerender':
 		$resource	= &$modx->resource;
 		$html		= &$resource->_output;
+		$hash 		= sha1($html);
 		$date		= time();
+
 
 		$protocol	= (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
 		$domain		= $_SERVER['HTTP_HOST'];
@@ -17,30 +19,31 @@ switch ($modx->event->name) {
 			// create new
 			$lmimsRow	= $modx->newObject('modLMIMS');
 			$lmimsDate	= $date;
-			$lmimsHtml	= $html;
+			$lmimsHash	= $hash;
 			$lmimsRow->fromArray(array(
 				'key'	=> $key,
 				'date'	=> $lmimsDate,
-				'html'	=> $lmimsHtml
+				'hash'	=> $lmimsHash,
+				'resource' => $resource->id,
 			), '', true);
 			$lmimsRow->save();
 		}
 		// get last modified data
 		else {
 			$lmimsDate	= $lmimsRow->date;
-			$lmimsHtml	= $lmimsRow->html;
+			$lmimsHash	= $lmimsRow->hash;
 		}
 
-		// if current document html not equal html from lmimsRow
-		if ($html !== $lmimsHtml) {
+		// if current document hash not equal hash from lmimsRow
+		if ($hash !== $lmimsHash) {
 			$lmimsRow->fromArray(array(
 				'key'	=> $key,
-				'html'	=> $html,
-				'date'	=> $date
+				'date'	=> $date,
+				'hash'	=> $hash
 			), '', true);
 			$lmimsRow->save();
 			$lmimsDate	= $date;
-			$lmimsHtml	= $html;
+			$lmimsHash	= $hash;
 		}
 
 		/**
@@ -82,6 +85,15 @@ switch ($modx->event->name) {
 			file_get_contents($url);
 		}
 
+		break;
+
+	case 'OnBeforeEmptyTrash':
+		$deletedids = $modx->event->params['ids'];
+		if (!empty($deletedids)) {
+			$modx->removeCollection('modLMIMS', array(
+				'resource:IN' => $deletedids,
+			));
+		}
 		break;
 
 	default:

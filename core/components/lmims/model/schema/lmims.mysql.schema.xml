@@ -3,7 +3,8 @@
 	<object class="modLMIMS" table="lmims" extends="xPDOObject">
 		<field key="key" dbtype="varchar" precision="32" phptype="string" null="false" default="" index="pk" />
 		<field key="date" dbtype="int" precision="20" phptype="timestamp" null="false" default="0" index="index" />
-		<field key="html" dbtype="text" phptype="string" null="true" />
+		<field key="hash" dbtype="char" precision="40" phptype="string" null="true" default="" index="index" />
+		<field key="resource" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="true" default="0" />
 
 		<index alias="key" name="key" primary="true" unique="true" type="BTREE">
 			<column key="key" length="" collation="A" null="false" />
